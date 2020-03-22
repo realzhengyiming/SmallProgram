@@ -1,0 +1,7 @@
+环境python36 ,你可以使用之前的ancondas 创建一个python3.6的虚拟环境再操作
+
+pip install django==2.0
+pip install pymysql 
+
+在此目录下启动项目（命令窗口）
+python manage.py runserver 127.0.0.1:8000      
