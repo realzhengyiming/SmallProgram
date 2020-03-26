@@ -20,6 +20,7 @@ app_name = "xiaochengxu"    # 这儿需要设置这个来分辨不同的app
 
 urlpatterns = [
     path("", views.index, name='index'),
+    path("/course_get", views.course_get.as_view(), name="course_get"),
 
     # path('<int:page>/',views.page,name = 'page'),
     # /polls/  这种默认是在polls下的/
