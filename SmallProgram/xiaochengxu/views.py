@@ -1,12 +1,16 @@
 from django.shortcuts import render
 from django.db import connection
 from django.shortcuts import HttpResponse
-# from .models import House
 import time
-# from django.db.models import Avg, Max, Min, Count, Sum  # 直接使用models中的统计类来进行统计查询操作
+import json
+from random import randrange
+from django.http import HttpResponse
+from rest_framework.views import APIView
+from .tools_pakages import *
+import os
 
+# from django.db.models import Avg, Max, Min, Count, Sum  # 直接使用models中的统计类来进行统计查询操作
 # Create your views here.
-#  封装一个自动的游标来使用,todo 可能是这个有问题把，这个
 def fetchall_sql(sql)->dict:  # 这儿唯一有一个就是显示页面的
     # latest_question_list = KeyWordItem # 换成直接使用sql来进行工作
     with connection.cursor() as cursor:
@@ -18,20 +22,8 @@ def fetchall_sql(sql)->dict:  # 这儿唯一有一个就是显示页面的
 
 
 def index(request):  # 这儿唯一有一个就是显示页面的
+    print()
     return HttpResponse("这个是response")
-    
-    
-
-    
-##### 后面开始pyechart绘图
-import json
-from random import randrange
-
-from django.http import HttpResponse
-from rest_framework.views import APIView
-
-from pyecharts.charts import Bar, Pie, Line, Geo, BMap
-from pyecharts import options as opts
 
 
 # Create your views here.
@@ -94,8 +86,9 @@ class course_get(APIView):  # 使用不同的试图来进行封装
         password = self.request.query_params.get("password")
         username = self.request.query_params.get("account")
   
-        # return Response(userSerializer.data)
-        return JsonResponse({"data":"你真有意思"})
+
+        checkPath(os.path.dirname(__file__)+"/cookieData")        # return Response(userSerializer.data)
+        return JsonResponse({"data":getCourseByCookie('17034480220'),"result":os.path.dirname(__file__)})
         
     def post(self,request,*args,**kwargs):
         password = self.request.query_params.get("password")
